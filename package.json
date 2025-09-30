@@ -1,0 +1,21 @@
+{
+  "name": "api-validation-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
+  "scripts": {
+    "start:backend": "npm run dev --workspace=backend",
+    "start:frontend": "npm run dev --workspace=frontend",
+    "install:all": "npm install --workspaces",
+    "build:all": "npm run build --workspaces",
+    "test:all": "npm test --workspaces"
+  },
+  "devDependencies": {
+    "lerna": "^9.0.0"
+  },
+  "dependencies": {}
+}

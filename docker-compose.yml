@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - db_data:/app/data
+    environment:
+      PYTHONUNBUFFERED: 1
+      JWT_SECRET: "local-dev-secret"
+      JWT_ALGORITHMS: "HS256"
+      ALLOWED_SERVER_HOSTS: "jsonplaceholder.typicode.com,localhost,127.0.0.1,dados.gov.br,www.dados.gov.br"
+      DATABASE_URL: "sqlite:///./data/data.db"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+volumes:
+  db_data:
